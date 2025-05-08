@@ -1,0 +1,1 @@
+ SmartSprint is an innovative quiz-based learning platform built to empower students, educators, and knowledge seekers. Whether you're a student preparing for exams or a teacher designing engaging assessments, SmartSprint makes learning interactive and fun.

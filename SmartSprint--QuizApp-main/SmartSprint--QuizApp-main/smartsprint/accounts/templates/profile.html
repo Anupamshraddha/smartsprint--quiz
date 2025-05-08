@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Profile</h1>
+<img class="profile-pic" src="{{ user.profile.profile_picture.url }}" alt="Profile Picture">
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <h2>User Information</h2>
+    <div class="form-group">
+        <label for="id_username">Username:</label>
+        {{ u_form.username }}
+        {% if u_form.username.errors %}
+            <div class="alert alert-danger">
+                {{ u_form.username.errors }}
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_email">Email:</label>
+        {{ u_form.email }}
+        {% if u_form.email.errors %}
+            <div class="alert alert-danger">
+                {{ u_form.email.errors }}
+            </div>
+        {% endif %}
+    </div>
+    
+    <h2>Profile Information</h2>
+    <div class="form-group">
+        <label for="id_date_of_birth">Date of Birth:</label>
+        {{ p_form.date_of_birth }}
+        {% if p_form.date_of_birth.errors %}
+            <div class="alert alert-danger">
+                {{ p_form.date_of_birth.errors }}
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_phone_number">Phone Number:</label>
+        {{ p_form.phone_number }}
+        {% if p_form.phone_number.errors %}
+            <div class="alert alert-danger">
+                {{ p_form.phone_number.errors }}
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_gender">Gender:</label>
+        {{ p_form.gender }}
+        {% if p_form.gender.errors %}
+            <div class="alert alert-danger">
+                {{ p_form.gender.errors }}
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_profile_picture">Profile Picture:</label>
+        {{ p_form.profile_picture }}
+        {% if p_form.profile_picture.errors %}
+            <div class="alert alert-danger">
+                {{ p_form.profile_picture.errors }}
+            </div>
+        {% endif %}
+    </div>
+    
+    <button type="submit" class="btn">Update Profile</button>
+</form> 
+{% endblock %}
