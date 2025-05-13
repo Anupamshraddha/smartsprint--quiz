@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Course</title>
+</head>
+<body>
+    <h2>Create a New Course</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>{{ form.title.label }}<br>{{ form.title() }}</p>
+        <p>{{ form.description.label }}<br>{{ form.description() }}</p>
+        <p>{{ form.image.label }}<br>{{ form.image() }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <br>
+    <a href="{{ url_for('list_courses') }}">View All Courses</a>
+</body>
+</html>

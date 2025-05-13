@@ -1,0 +1,87 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Add Quiz</title>
+</head>
+<body>
+    <h1>Add Quiz to Classroom</h1>
+    <form method="POST">
+        <label>Question:</label>
+        <input type="text" name="question" required><br><br>
+
+        <label>Option 1:</label>
+        <input type="text" name="option1" required><br>
+
+        <label>Option 2:</label>
+        <input type="text" name="option2" required><br>
+
+        <label>Option 3:</label>
+        <input type="text" name="option3" required><br>
+
+        <label>Option 4:</label>
+        <input type="text" name="option4" required><br>
+
+        <label>Correct Answer:</label>
+        <input type="text" name="correct_answer" required><br><br>
+
+        <button type="submit">Add Question</button>
+    </form>
+</body>
+</html>
+ -->
+
+
+ {% extends 'base.html' %}
+
+ {% block title_block %}Create Quiz{% endblock %}
+ 
+ {% block style%}
+ <style>
+
+.container {
+    max-width: 600px;
+    margin-top: 50px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+</style>
+{% endblock %}
+ {% block main_block %}
+
+
+
+
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">📝 Add a New Quiz Question</h2>
+        <form action="/add_quiz/{{ classroom_id }}" method="POST">
+            <div class="mb-3">
+                <label for="question" class="form-label">Question</label>
+                <input type="text" id="question" name="question" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Options</label>
+                <input type="text" name="option1" class="form-control mb-2" placeholder="Option 1" required>
+                <input type="text" name="option2" class="form-control mb-2" placeholder="Option 2" required>
+                <input type="text" name="option3" class="form-control mb-2" placeholder="Option 3" required>
+                <input type="text" name="option4" class="form-control mb-2" placeholder="Option 4" required>
+            </div>
+            <div class="mb-3">
+                <label for="correct_answer" class="form-label">Correct Answer</label>
+                <input type="text" id="correct_answer" name="correct_answer" class="form-control" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success">➕ Add Quiz</button>
+            </div>
+        </form>
+        <div class="text-center mt-3">
+            <a href="/" class="btn btn-secondary">⬅ Back to Home</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+{% endblock %}
+

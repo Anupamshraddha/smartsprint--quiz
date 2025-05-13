@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block title_block %}Login Page{% endblock %}
+
+
+{% block style %}
+<style>
+    .container-m{
+
+
+        width: 400px;        /* Adjust as needed */
+  padding: 20px;
+  margin: auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2{
+        color: black;
+    }
+    .book{
+        color: black;
+    }
+</style>
+{% endblock%}
+
+{% block main_block %}
+
+
+
+<div class="container-m">
+    <h2 class="text-center">Login</h2><br>
+    <form action="{{url_for('login')}}" method="POST">
+
+      
+        <div class="mb-3">
+            <!-- <label for="username">Enter Username:</label> -->
+            <input type="email" name="email" id="username" class="form-control" placeholder="Email" required>
+        </div>
+
+
+        <div class="mb-3">
+            <!-- <label for="password">Enter Password:</label> -->
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+        </div>
+
+
+        
+
+
+        <div class="mb-3">
+            <input type="submit" class="btn btn-primary" value="Login">
+        </div>
+    </form>
+
+    <p class="book">Register First <a class="btn btn-primary"  href="{{ url_for('register') }}">Register</a></p>
+    <p class="book">Forgot your password? 
+        <a class="btn btn-primary" href="{{ url_for('reset_password_request') }}">Reset Password</a>
+      </p>
+
+</div>
+
+{% endblock %}

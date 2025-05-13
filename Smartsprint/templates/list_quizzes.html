@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block title_block %}List Quizzes{% endblock %}
+
+{% block style %}
+<style>
+    .quiz-card {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    .quiz-card .card-body {
+        padding: 12px;
+    }
+    .quiz-card .btn {
+        padding: 4px 10px;
+        font-size: 0.85rem;
+    }
+</style>
+{% endblock %}
+{% block main_block %}
+
+
+    <style>
+        .quiz-card {
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+        .quiz-card .card-body {
+            padding: 12px;
+        }
+        .quiz-card .btn {
+            padding: 4px 10px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+  
+<div class="container mt-4">
+    <h4 class="mb-4 text-center">Available Quizzes for <strong>{{ course.name }}</strong></h4>
+
+    {% if course.quizzes %}
+        <div class="row">
+            {% for quiz in course.quizzes %}
+                <div class="col-md-4 mb-3">
+                    <div class="card quiz-card shadow-sm">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">{{ quiz.name }}</h6>
+                            <a href="{{ url_for('show_quiz', course_id=course.id, quiz_name=quiz.name) }}" class="btn btn-primary btn-sm me-2">Take Quiz</a>
+                            {% if current_user.role == "admin" %}
+                                    <form action="{{ url_for('add_question', course_id=course.id, quiz_name=quiz.name) }}" method="GET" class="d-inline">
+                                    <button type="submit" class="btn btn-success btn-sm">Create New</button>
+                                </form>
+                                <form action="{{ url_for('delete_quiz', course_id=course.id, quiz_name=quiz.name) }}" method="POST" class="d-inline">
+                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this quiz?');" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted text-center">No quizzes available for this course yet.</p>
+        {% if current_user.role == "admin" %}
+            <div class="text-center">
+                <a href="{{ url_for('create_quiz', course_id=course.id) }}" class="btn btn-success btn-sm">Create First Quiz</a>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <div class="mt-4 text-center">
+        <a href="{{ url_for('view_courses') }}" class="btn btn-secondary btn-sm">Back to Courses</a>
+    </div>
+</div>
+
+{% endblock %}
