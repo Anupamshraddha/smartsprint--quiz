@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body{
+            background:linear-gradient(to right, #4b6cb7,#182848);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 50px; width: 50px;">
+            </a>
+            <form class="d-flex mx-auto">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="/1/reviews/" class="nav-link">Feedbacks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/chat/chat/">Chat with AI</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'courses' %}">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">{{ user.username }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                     <li class="nav-item"><a class='nav-link' href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Customer Reviews</h2>
+
+      
+        <div class="mb-6">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-700">Recent Reviews</h3>
+            {% for review in reviews %}
+            <div class="bg-white shadow-lg rounded-lg p-6 mb-6 transition-transform transform hover:scale-105 duration-300 ease-in-out">
+                <h4 class="text-xl font-semibold text-blue-600">{{ review.product_name }}</h4>
+                <p class="text-gray-500 text-sm mb-2">
+                    By <span class="font-medium">{{ review.author }}</span> • 
+                    {{ review.created_at|date:"F j, Y" }} • 
+                    <span class="text-yellow-500">{{ review.rating }} stars</span>
+                </p>
+                <p class="text-gray-700">{{ review.review_content }}</p>
+            </div>
+            {% empty %}
+            <p class="text-gray-500">No reviews yet.</p>
+            {% endfor %}
+        </div>
+
+        
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Submit a Review</h3>
+            <form method="POST" class="space-y-4">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out">Submit Review</button>
+            </form>
+        </div>
+    </div>
+
+   
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <p>&copy; 2025 SmartSprint. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
